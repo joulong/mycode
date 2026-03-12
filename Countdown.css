@@ -1,0 +1,286 @@
+/* 全域設定 */
+body {
+    font-family: "標楷體", "BiauKai", serif;
+    background: #333; /* 深色背景更能顯現霓虹 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 容器背景調深，讓霓虹更明顯 */
+.container {
+    background: #4a443f; /* 比原本更深一點的質感咖棕色 */
+    padding: 50px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+:root { --main-color: #ff00ff; }
+[data-theme="hacker"] { --main-color: #00ff41; }
+[data-theme="scifi"] { --main-color: #00d4ff; }
+
+
+
+/* 霓虹文字效果優化 */
+.neon-text {
+    color: #fff; /* 主文字設為白色 */
+    font-weight: bold;
+    /* 多層發光：內層白、中層粉、外層擴散 */
+    text-shadow: 
+        0 0 10px #fff, 
+        0 0 20px #ff00ff, 
+        0 0 40px #ff00ff, 
+        0 0 70px #ff00ff;
+    background: rgba(0, 0, 0, 0.3); /* 淡淡的黑底，像霓虹燈的背板 */
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+
+
+.neon-text { color: var(--main-color); text-shadow: 0 0 10px var(--main-color); }
+#progress-bar { background: var(--main-color); box-shadow: 0 0 10px var(--main-color); }
+/* 確保倒數數字足夠醒目 */
+#display {
+    font-size: 8rem;
+    font-weight: 900; /* 加粗字體 */
+    margin: 30px 0;
+}
+
+/* 按鈕與下拉選單統一 */
+button, select {
+    font-family: "標楷體";
+    font-size: 1.5rem;
+    padding: 15px 25px;
+    margin: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background: white;
+}
+
+button:hover {
+    background: #f0f0f0;
+}
+
+/* 炸彈彈窗樣式 */
+#bombModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 999;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #ff0000;
+}
+
+.modal-content h1 {
+    font-size: 5rem;
+    text-shadow: 0 0 20px red;
+}
+
+.leave-btn {
+    background: #ff0000;
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 20px 50px;
+}
+
+/* 炸彈彈窗 - 初始狀態必須是隱藏 */
+#bombModal {
+    display: none;      /* 這一行最重要：預設不顯示 */
+    position: fixed;    /* 固定在螢幕上 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9); /* 半透明黑色背景 */
+    z-index: 9999;      /* 確保它在最上層 */
+    color: white;
+}
+
+/* 炸彈文字動態放大縮小效果 */
+.modal-content h1 {
+    font-size: 5rem;
+    color: #ff0000;
+    text-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+    font-family: "標楷體";
+    
+    /* 套用動畫：名稱 速度 曲線 無限次數 */
+    animation: pulse 1.2s ease-in-out infinite;
+}
+
+/* 定義放大縮小動畫 */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        text-shadow: 0 0 20px #ff0000;
+    }
+    50% {
+        transform: scale(1.2); /* 放大到 1.2 倍 */
+        text-shadow: 0 0 50px #ff0000, 0 0 80px #ff4500; /* 光芒變強 */
+    }
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 20px #ff0000;
+    }
+}
+
+/* 離開按鈕：文字改橘色 */
+.leave-btn {
+    font-family: "標楷體";
+    font-size: 2rem;
+    padding: 15px 40px;
+    background: white;
+    border: 3px solid #ff8c00; /* 橘色邊框增加對比 */
+    color: #ff8c00;            /* 文字改為橘色 */
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.leave-btn:hover {
+    background: #ff8c00;
+    color: white;
+}
+
+.sound-toggle {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+}
+
+#soundToggle {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#progress-container {
+    width: 100%;
+    height: 10px;
+    background: #333;
+    border-radius: 5px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+#progress-bar {
+    width: 100%;
+    height: 100%;
+    background: #ff00ff;
+    box-shadow: 0 0 10px #ff00ff;
+    transition: width 1s linear;
+}
+
+.shortcuts button { font-size: 1rem; padding: 5px 10px; margin: 5px; }
+
+/* 將下方的設定項變成一列 */
+.footer-controls {
+    display: flex;         /* 啟用彈性佈局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center;     /* 垂直居中 */
+    gap: 15px;               /* 按鈕間隔 */
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* 加上分隔線增加質感 */
+    flex-wrap: wrap;         /* 螢幕太小時會自動換行，不會跑版 */
+}
+
+/* 確保所有選單與按鈕高度一致 */
+.footer-controls select, 
+.footer-controls button {
+    font-size: 1rem;
+    padding: 8px 12px;
+}
+
+.line-settings-container {
+    display: flex;
+    flex-direction: column; /* 改為垂直排列 */
+    align-items: center;    /* 置中 */
+    gap: 10px;              /* 設定項之間的間距 */
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1); /* 微透亮底色 */
+    border-radius: 15px;
+    width: 80%;             /* 限制寬度不跑版 */
+    max-width: 400px;
+}
+
+.line-input {
+    width: 90%;             /* 設定輸入框寬度 */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #333;
+    color: white;
+}
+
+.line-save-btn {
+    padding: 10px 20px;
+    background-color: #00b900; /* LINE 經典綠 */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.line-save-btn:hover {
+    background-color: #009900;
+}
+
+/* 設定區容器 */
+.settings-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 15px 0;
+    color: white;
+}
+
+/* 統一容器 */
+.toggle-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 統一 Checkbox 尺寸 */
+.toggle-item input[type="checkbox"] {
+    appearance: none;      /* 移除原生樣式 */
+    width: 20px;           /* 強制固定寬度 */
+    height: 20px;          /* 強制固定高度 */
+    border: 2px solid #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    background: transparent;
+}
+
+/* 勾選時的顏色 */
+.toggle-item input[type="checkbox"]:checked {
+    background-color: #007bff; /* 藍色 */
+    border-color: #007bff;
+}
+
+/* 統一 Label 文字大小 */
+.toggle-item label {
+    font-size: 1.2rem;
+    cursor: pointer;
+    white-space: nowrap; /* 確保文字不換行，保持對齊 */
+}

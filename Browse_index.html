@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>題庫系統</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Browse.css">
+  <link rel="stylesheet" href="css/ui-glass.css">
+</head>
+<body>
+
+<div id="nav-container"></div>
+
+<script src="js/loadNav.js"></script>
+
+
+<div class="page-container">
+
+  <nav class="d-flex justify-content-center pt-4 pb-2">
+    <div class="nav-glass-pills">
+      <a href="#browse" class="nav-item-link active" id="tab-browse">
+        <i class="bi bi-grid-3x3-gap-fill me-2"></i>瀏覽題庫
+      </a>
+      <a href="#admin" class="nav-item-link" id="tab-admin">
+        <i class="bi bi-shield-lock-fill me-2"></i>管理後台
+      </a>
+    </div>
+  </nav>
+
+  <div id="browsePage" class="page pt-0"> <div class="container">
+          <h2 class="text-white text-center mt-2 mb-4">題庫清單</h2>
+     
+ <div class="row mb-4 justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+        <div class="glass-card p-3">
+            <div class="row g-2 align-items-center">
+                <div class="col-12 col-md-6">
+                    <input type="text" id="searchInput" class="form-control" placeholder="🔍 搜尋主題或內容..." oninput="filterData()">
+                    
+                    <div id="historyContainer" class="mt-2 text-white-50 small d-flex align-items-center flex-wrap">
+                        <span class="me-2">歷史:</span>
+                        <div id="historyList"></div>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-md-3">
+                    <select id="typeFilter" class="form-select" onchange="filterData()">
+                        <option value="全部">全部類型</option>
+                        <option value="考試">考試</option>
+                        <option value="練習">練習</option>
+                    </select>
+                </div>
+                <div class="col-6 col-md-3">
+                    <button class="btn btn-custom w-100" onclick="sortData()">按次數排序 ⇅</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+      <div id="cardContainer" class="row g-4"></div>
+    </div>
+  </div>
+<div id="adminPage" class="page d-none pt-2 pb-5">
+    <div class="container">
+        <div id="authArea" class="text-center">
+            <input type="password" id="adminPwd" class="form-control w-25 mx-auto mb-2" placeholder="請輸入密碼">
+            <button class="btn btn-primary" onclick="checkAuth()">登入後台</button>
+        </div>
+  </div>
+
+  <div class="container">
+    <h2 class="text-white text-center mb-4">✨ 開放連結管理後台 ✨</h2> 
+    <div id="managerArea" class="d-none">
+  <div class="glass-card mb-4 p-4">
+    <h4 class="text-white mb-3">新增題目</h4>
+      <div class="row g-2">
+      <div class="col-md-3"><input type="text" id="newTitle" class="form-control" placeholder="主題"></div>
+      <div class="col-md-4"><input type="text" id="newLink" class="form-control" placeholder="連結 (URL)"></div>
+      <div class="col-md-2"><input type="text" id="newAuthor" class="form-control" placeholder="作者"></div>
+      <div class="col-md-3"><button class="btn btn-custom w-100" onclick="addItem()">新增</button></div>
+      </div>
+  </div>
+
+    <div class="glass-card p-4">
+      <table class="table table-borderless text-white align-middle">
+        <thead>
+          <tr>
+            <th>主題</th>
+            <th>連結 (URL)</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="managerTable"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+ <script src="Browse_main.js"></script>
+</body>
+</html>

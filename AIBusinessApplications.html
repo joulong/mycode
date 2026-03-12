@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="AIBusinessApplications.css">
+    <link rel="stylesheet" href="css/ui-glass.css">
+    <title>AI 需求問卷</title>
+</head>
+<body class="d-flex align-items-center justify-content-center min-vh-100 p-3">
+
+
+
+    <div class="glass-container p-4 p-md-5">
+        <h2 class="text-white text-center mb-4">AI 課程需求調查</h2>
+        <form id="surveyForm">
+            <div class="mb-3">
+                <label class="form-label text-white">1. 您的目前職稱</label>
+                <input type="text" class="form-control" name="職稱" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-white">2. 您所在的產業</label>
+                <input type="text" class="form-control" name="產業" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-white">3. 貴公司目前使用 AI 的現狀</label>
+                <select class="form-select" name="AI現狀">
+                    <option>尚未開始</option><option>評估規劃中</option><option>已小規模導入</option>
+                </select>
+            </div>
+            <div class="mb-3 text-white">
+                <label class="form-label">4. 商業應用瓶頸（可複選）</label><br>
+                <input type="checkbox" name="瓶頸" value="技術人力不足"> 技術人力不足
+                <input type="checkbox" name="瓶頸" value="數據品質不佳"> 數據品質不佳
+            </div>
+            <div class="mb-3 text-white">
+                <label class="form-label">5. 感興趣的 AI 應用領域（可複選）</label><br>
+                <input type="checkbox" name="應用領域" value="自動化"> 自動化
+                <input type="checkbox" name="應用領域" value="數據分析"> 數據分析
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-white">6. 偏好的課程形式</label>
+                <select class="form-select" name="課程形式">
+                    <option>線上直播</option><option>預錄影音</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-white">7. 學習投入時間</label>
+                <input type="text" class="form-control" name="學習時間">
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-white">8. 合理的費用區間</label>
+                <input type="text" class="form-control" name="費用區間">
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-white">9. 希望包含的練習形式</label>
+                <input type="text" class="form-control" name="練習建議">
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mt-3 glow-btn">提交問卷</button>
+        </form>
+    </div>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzbz9Rl-Y0gGGYyvw55JEAmmkZoqMDdgTjVyUjUQVXax6jMsqcZM9OxgiirhaZw_Tu3/exec'; // <--- 填入你的 GAS 部署網址
+
+    document.getElementById('surveyForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]'); // 正確獲取按鈕
+        btn.disabled = true;
+        btn.innerText = "傳送中...";
+        
+        const formData = new FormData(e.target);
+        const data = {};
+        formData.forEach((value, key) => {
+            if (data[key]) data[key] += ", " + value;
+            else data[key] = value;
+        });
+
+        fetch(scriptURL, { 
+            method: 'POST', 
+            mode: 'no-cors', 
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(() => {
+            // 請求完成（no-cors 下我們只能假設成功）
+            Swal.fire({
+                title: '提交成功！',
+                icon: 'success',
+                confirmButtonText: '確定'
+            });
+            
+            // 恢復按鈕狀態
+            btn.disabled = false;
+            btn.innerText = "提交問卷";
+            e.target.reset();
+        })
+        .catch(err => {
+            console.error(err); // 在主控台查看具體錯誤
+            Swal.fire({
+                title: '發生錯誤',
+                text: '請檢查網路或後端設定',
+                icon: 'error'
+            });
+            btn.disabled = false;
+            btn.innerText = "提交問卷";
+        });
+    });
+</script>
+</body>
+</html>

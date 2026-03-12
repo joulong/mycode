@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>霓虹炸彈計時器</title>
+    <link rel="stylesheet" href="Countdown.css">
+    <link rel="stylesheet" href="css/ui-glass.css">
+</head>
+<body>
+    
+    <div class="container">
+        <h1 class="neon-text">倒數計時器</h1>
+        
+    <div class="controls">
+        <select id="hours"></select>
+        <select id="minutes"></select>
+        <select id="seconds"></select>
+        <button id="startBtn">開始倒數</button>
+
+    </div>
+
+        <div class="shortcuts">
+            <button onclick="setQuickTime(5)">5分鐘</button>
+            <button onclick="setQuickTime(10)">10分鐘</button>
+        </div>
+
+        <div id="display" class="neon-text">00:00:00</div>
+        <div id="progress-container"><div id="progress-bar"></div></div>
+
+        <div class="footer-controls">
+        <button id="lineConfigBtn" onclick="toggleLineSettings()">LINE 設定</button>
+    </div>
+
+    <div id="lineSettings" class="line-settings-container" style="display:none;">
+        <div class="input-group">
+            <label for="lineUserId">User ID:</label>
+            <input type="text" id="lineUserId" class="line-input">
+        </div>
+        
+        <div class="input-group">
+            <label for="lineChannelSecret">Channel Secret:</label>
+            <input type="text" id="lineChannelSecret" class="line-input">
+        </div>
+        
+        <div class="input-group">
+            <label for="lineAccessToken">Channel Access Token:</label>
+            <input type="text" id="lineAccessToken" class="line-input">
+        </div>
+        
+        <button onclick="saveLineSettings()" class="line-save-btn">儲存設定</button>
+    </div>
+        
+    <select id="langSelect" onchange="changeLanguage()">
+        <option value="zh">繁體中文</option>
+        <option value="en">English</option>
+    </select>
+    <select id="themeSelect" onchange="changeTheme()">
+        <option value="default">霓虹粉</option>
+        <option value="hacker">綠色駭客</option>
+        <option value="scifi">藍色科幻</option>
+    </select>
+    <button id="fullScreenBtn">全螢幕</button>
+    <button id="resetBtn">重置</button>
+    <!-- <div class="sound-toggle">
+        <input type="checkbox" id="soundToggle" checked> <label>滴答聲</label>
+    </div> 
+     -->
+    <div class="settings-row">
+    <div class="toggle-item">
+        <input type="checkbox" id="soundToggle" checked> 
+        <label>滴答聲</label>
+    </div>
+    <div class="toggle-item">
+        <input type="checkbox" id="lineNotifyToggle"> 
+        <label>傳送 LINE 通知</label>
+    </div>
+</div>
+
+
+    </div>   
+
+    </div>
+    </div>
+
+    <div id="bombModal">
+        <div class="modal-content">
+            <h1>💥時間到了！💥</h1>
+            <button class="leave-btn" onclick="closeModal()">離開</button>
+        </div>
+    </div>
+
+    <script src="Countdown.js"></script>
+</body>
+</html>

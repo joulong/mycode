@@ -1,0 +1,66 @@
+/* 背景流光動畫 */
+body {
+    background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 毛玻璃容器 */
+.glass-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    width: 100%;
+    max-width: 500px;
+}
+
+/* 華麗按鈕 */
+.glow-btn {
+    background: linear-gradient(90deg, #ff00cc, #3333ff);
+    border: none;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.glow-btn:hover {
+    box-shadow: 0 0 20px #ff00cc;
+    transform: scale(1.02);
+}
+
+.form-control, .form-select {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+}
+
+.form-select {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    
+    /* 核心修改：使用 none 移除 Bootstrap 預設箭頭 */
+    background-image: none !important; 
+    
+    /* 改用自訂的箭頭，並確保只出現一個 */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+    
+    /* 確保背景圖示只出現一次且位置正確 */
+    background-repeat: no-repeat !important;
+    background-position: right 0.75rem center !important;
+    background-size: 16px 12px !important;
+}
+/* 修正下拉選單內的選項（針對部分瀏覽器） */
+.form-select option {
+    background-color: #302b63; /* 選項展開時的背景色，避免變成全白 */
+    color: #ffffff;           /* 選項文字為白色 */
+}

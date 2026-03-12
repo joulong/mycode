@@ -1,0 +1,64 @@
+/* Responsive Grid System */
+
+.container{
+
+    width:90%;
+    max-width:1200px;
+
+    margin:auto;
+}
+
+/* 基本網格 */
+
+.grid{
+
+    display:grid;
+
+    gap:20px;
+}
+
+/* 3 欄 */
+
+.grid-3{
+
+    grid-template-columns: repeat(3,1fr);
+}
+
+/* 4 欄 */
+
+.grid-4{
+
+    grid-template-columns: repeat(4,1fr);
+}
+
+/* 2 欄 */
+
+.grid-2{
+
+    grid-template-columns: repeat(2,1fr);
+}
+
+/* 響應式 */
+
+@media (max-width:1000px){
+
+.grid-4{
+    grid-template-columns: repeat(2,1fr);
+}
+
+.grid-3{
+    grid-template-columns: repeat(2,1fr);
+}
+
+}
+
+@media (max-width:600px){
+
+.grid-4,
+.grid-3,
+.grid-2{
+
+    grid-template-columns:1fr;
+}
+
+}

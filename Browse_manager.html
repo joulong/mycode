@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>題庫管理後台</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Browse.css">
+  <link rel="stylesheet" href="css/ui-glass.css">
+</head>
+<body>
+
+<div id="nav-container"></div>
+
+<script src="js/loadNav.js"></script>
+
+
+<div class="page-container">
+
+    <!-- <nav class="text-center py-3">
+  <a href="#browse" class="text-white mx-3">瀏覽題庫</a>
+  <a href="#admin" class="text-white mx-3">管理後台</a>
+</nav> -->
+
+<div id="browsePage" class="page">
+  </div>
+
+<div id="adminPage" class="page d-none">
+  </div>
+
+<div class="container py-5">
+  <h2 class="text-white text-center mb-4">✨ 開放連結管理後台 ✨</h2>
+
+  <div id="authArea" class="glass-card p-4 mx-auto" style="max-width: 400px;">
+    <input type="password" id="adminPwd" class="form-control mb-3" placeholder="請輸入管理密碼">
+    <button class="btn btn-custom w-100" onclick="checkAuth()">登入</button>
+  </div>
+  
+  <div id="managerArea" class="d-none">
+<div class="glass-card mb-4 p-4">
+  <h4 class="text-white mb-3">新增題目</h4>
+    <div class="row g-2">
+    <div class="col-md-3"><input type="text" id="newTitle" class="form-control" placeholder="主題"></div>
+    <div class="col-md-4"><input type="text" id="newLink" class="form-control" placeholder="連結 (URL)"></div>
+    <div class="col-md-2"><input type="text" id="newAuthor" class="form-control" placeholder="作者"></div>
+    <div class="col-md-3"><button class="btn btn-custom w-100" onclick="addItem()">新增</button></div>
+    </div>
+</div>
+
+    <div class="glass-card p-4">
+      <table class="table table-borderless text-white align-middle">
+        <thead>
+          <tr>
+            <th>主題</th>
+            <th>連結 (URL)</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="managerTable"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="Browse_manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>華麗題庫瀏覽中心</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="Browse.css">
+  <link rel="stylesheet" href="css/ui-glass.css">
+</head>
+<body>
+<div id="nav-container"></div>
+
+<script src="js/loadNav.js"></script>
+
+
+<div class="page-container">
+
+<div class="container py-5">
+  <h1 class="text-center mb-5 fw-bold">✨ 公開瀏覽中心 ✨</h1>
+  
+  <div class="row mb-4 justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <div class="glass-card p-3">
+        <div class="row g-2 align-items-center">
+          <div class="col-12 col-md-6">
+            <input type="text" id="searchInput" class="form-control" placeholder="🔍 搜尋主題或內容...">
+          </div>
+          <div class="col-6 col-md-3">
+            <select id="typeFilter" class="form-select">
+              <option value="全部">全部類型</option>
+              <option value="考試">考試</option>
+              <option value="練習">練習</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-3">
+            <button class="btn btn-custom w-100" onclick="sortData()">按次數排序 ⇅</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="loader" class="text-center">載入華麗資料中...</div>
+  <div class="row g-4" id="cardContainer"></div>
+</div>
+
+<script src="Browse.js"></script>
+</body>
+</html>

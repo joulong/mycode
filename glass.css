@@ -1,0 +1,65 @@
+/* Glassmorphism UI */
+
+body{
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    min-height:100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 玻璃卡片 */
+.glass-card{
+
+    background: rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-radius:16px;
+
+    border:1px solid rgba(255,255,255,0.3);
+
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.2);
+
+    padding:20px;
+}
+
+/* 玻璃按鈕 */
+
+.glass-btn{
+
+    background: rgba(255,255,255,0.2);
+
+    border:1px solid rgba(255,255,255,0.4);
+
+    backdrop-filter: blur(10px);
+
+    padding:10px 20px;
+
+    border-radius:10px;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.glass-btn:hover{
+
+    background: rgba(255,255,255,0.35);
+
+}
+
+/* 玻璃導航列 */
+
+.glass-nav{
+
+    background: rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(15px);
+
+    padding:15px;
+
+    border-bottom:1px solid rgba(255,255,255,0.3);
+}
