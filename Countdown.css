@@ -1,69 +1,75 @@
-/* 全域設定 */
+/* --- 基礎重置 --- */
+* { box-sizing: border-box; }
+
 body {
     font-family: "標楷體", "BiauKai", serif;
-    background: #333; /* 深色背景更能顯現霓虹 */
+    background: #333;
+    margin: 0;
+    min-height: 100vh; /* 改為最小高度，讓內容可捲動 */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-/* 容器背景調深，讓霓虹更明顯 */
-.container {
-    background: #4a443f; /* 比原本更深一點的質感咖棕色 */
-    padding: 50px;
-    border-radius: 30px;
-    text-align: center;
+    padding: 20px; /* 防止緊貼邊緣 */
 }
 
 :root { --main-color: #ff00ff; }
 [data-theme="hacker"] { --main-color: #00ff41; }
 [data-theme="scifi"] { --main-color: #00d4ff; }
 
+/* --- 容器佈局 --- */
+.container {
+    background: #4a443f;
+    padding: 30px;
+    border-radius: 30px;
+    text-align: center;
+    width: 100%;
+    max-width: 600px; /* 限制最大寬度，確保版面美觀 */
+}
 
-
-/* 霓虹文字效果優化 */
+/* --- 霓虹文字效果 --- */
 .neon-text {
-    color: #fff; /* 主文字設為白色 */
+    color: var(--main-color);
     font-weight: bold;
-    /* 多層發光：內層白、中層粉、外層擴散 */
-    text-shadow: 
-        0 0 10px #fff, 
-        0 0 20px #ff00ff, 
-        0 0 40px #ff00ff, 
-        0 0 70px #ff00ff;
-    background: rgba(0, 0, 0, 0.3); /* 淡淡的黑底，像霓虹燈的背板 */
+    text-shadow: 0 0 10px var(--main-color), 0 0 20px var(--main-color);
+    background: rgba(0, 0, 0, 0.3);
     padding: 10px 20px;
     border-radius: 15px;
 }
 
-
-.neon-text { color: var(--main-color); text-shadow: 0 0 10px var(--main-color); }
-#progress-bar { background: var(--main-color); box-shadow: 0 0 10px var(--main-color); }
-/* 確保倒數數字足夠醒目 */
 #display {
-    font-size: 8rem;
-    font-weight: 900; /* 加粗字體 */
-    margin: 30px 0;
+    font-size: 5rem; /* 適度縮小，確保手機不換行 */
+    font-weight: 900;
+    margin: 20px 0;
+    color: var(--main-color);
 }
 
-/* 按鈕與下拉選單統一 */
+/* --- 按鈕與選單統一 --- */
 button, select {
     font-family: "標楷體";
-    font-size: 1.5rem;
-    padding: 15px 25px;
-    margin: 10px;
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    margin: 5px;
     border-radius: 8px;
     border: 1px solid #ccc;
     cursor: pointer;
     background: white;
 }
 
-button:hover {
-    background: #f0f0f0;
+button:hover { background: #f0f0f0; }
+
+/* --- 底部控制列 --- */
+.footer-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    flex-wrap: wrap;
 }
 
+/* --- 炸彈彈窗樣式 --- */
 /* 炸彈彈窗樣式 */
 #bombModal {
     display: none;
@@ -122,69 +128,16 @@ button:hover {
     animation: pulse 1.2s ease-in-out infinite;
 }
 
-/* 定義放大縮小動畫 */
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-        text-shadow: 0 0 20px #ff0000;
-    }
-    50% {
-        transform: scale(1.2); /* 放大到 1.2 倍 */
-        text-shadow: 0 0 50px #ff0000, 0 0 80px #ff4500; /* 光芒變強 */
-    }
-    100% {
-        transform: scale(1);
-        text-shadow: 0 0 20px #ff0000;
-    }
+    0%, 100% { transform: scale(1); text-shadow: 0 0 20px #ff0000; }
+    50% { transform: scale(1.1); text-shadow: 0 0 40px #ff0000, 0 0 60px #ff4500; }
 }
 
-/* 離開按鈕：文字改橘色 */
-.leave-btn {
-    font-family: "標楷體";
-    font-size: 2rem;
-    padding: 15px 40px;
-    background: white;
-    border: 3px solid #ff8c00; /* 橘色邊框增加對比 */
-    color: #ff8c00;            /* 文字改為橘色 */
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-.leave-btn:hover {
-    background: #ff8c00;
-    color: white;
-}
-
-.sound-toggle {
-    margin-top: 15px;
-    font-size: 1.2rem;
-    color: white;
-    cursor: pointer;
-}
-
-#soundToggle {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
-
-#progress-container {
-    width: 100%;
-    height: 10px;
-    background: #333;
-    border-radius: 5px;
-    margin: 20px 0;
-    overflow: hidden;
-}
-
+/* --- 其他功能元件 --- */
 #progress-bar {
-    width: 100%;
-    height: 100%;
-    background: #ff00ff;
-    box-shadow: 0 0 10px #ff00ff;
+    height: 10px;
+    background: var(--main-color);
+    box-shadow: 0 0 10px var(--main-color);
     transition: width 1s linear;
 }
 
@@ -201,6 +154,7 @@ button:hover {
     border-top: 1px solid rgba(255, 255, 255, 0.2); /* 加上分隔線增加質感 */
     flex-wrap: wrap;         /* 螢幕太小時會自動換行，不會跑版 */
 }
+
 
 /* 確保所有選單與按鈕高度一致 */
 .footer-controls select, 
