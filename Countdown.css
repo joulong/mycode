@@ -1,17 +1,18 @@
 /* --- 基礎重置 --- */
 * { box-sizing: border-box; }
 
+/* 1. 確保內容不超出螢幕 */
 body {
     font-family: "標楷體", "BiauKai", serif;
     background: #333;
-    margin: 0;
-    min-height: 100vh; /* 改為最小高度，讓內容可捲動 */
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 20px; /* 防止緊貼邊緣 */
+    align-items: flex-start; /* 改為頂部對齊，避免內容過多被切掉 */
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px 10px;
+    box-sizing: border-box;
 }
-
 :root { --main-color: #ff00ff; }
 [data-theme="hacker"] { --main-color: #00ff41; }
 [data-theme="scifi"] { --main-color: #00d4ff; }
@@ -19,11 +20,11 @@ body {
 /* --- 容器佈局 --- */
 .container {
     background: #4a443f;
-    padding: 30px;
+    padding: 20px; /* 稍微縮小內距 */
     border-radius: 30px;
     text-align: center;
-    width: 100%;
-    max-width: 600px; /* 限制最大寬度，確保版面美觀 */
+    width: 95%;
+    max-width: 600px;
 }
 
 /* --- 霓虹文字效果 --- */
@@ -36,11 +37,17 @@ body {
     border-radius: 15px;
 }
 
+/* 2. 解決數字模糊問題：強化輪廓 */
 #display {
-    font-size: 5rem; /* 適度縮小，確保手機不換行 */
+    font-size: 5.5rem; /* 適度縮小字體以騰出空間 */
     font-weight: 900;
-    margin: 20px 0;
+    margin: 15px 0;
     color: var(--main-color);
+    /* 核心調整：減少模糊層，保留一個清晰的核心發光 */
+    text-shadow: 
+        0 0 5px #fff,               /* 內圈白色讓數字清晰 */
+        0 0 10px var(--main-color), /* 中圈原色 */
+        0 0 20px var(--main-color); /* 外圈發光 */
 }
 
 /* --- 按鈕與選單統一 --- */
@@ -156,12 +163,16 @@ button:hover { background: #f0f0f0; }
 }
 
 
-/* 確保所有選單與按鈕高度一致 */
-.footer-controls select, 
-.footer-controls button {
+
+.footer-controls button, 
+.footer-controls select,
+.footer-controls .line-btn { /* 假設你給 LINE 設定按鈕一個類別 */
     font-size: 1rem;
     padding: 8px 12px;
+    margin: 2px;
 }
+/* 確保所有選單與按鈕高度一致 */
+
 
 .line-settings-container {
     display: flex;
@@ -199,13 +210,13 @@ button:hover { background: #f0f0f0; }
     background-color: #009900;
 }
 
-/* 設定區容器 */
 .settings-row {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    margin: 15px 0;
+    gap: 15px;
+    margin-top: 10px;
     color: white;
+    font-size: 0.9rem;
 }
 
 /* 統一容器 */
